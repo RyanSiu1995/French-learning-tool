@@ -36,7 +36,7 @@ function App() {
   const classes = useStyles();
     
   return (
-    <Router>
+    <Router basename="French-learning-tool/build">
      <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
@@ -49,7 +49,7 @@ function App() {
         </Toolbar>
       </AppBar>
       <Switch>
-        <Route path="/numbers">
+        <Route  path="/numbers">
           <Numbers/>
         </Route>
       </Switch>
