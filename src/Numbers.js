@@ -25,6 +25,7 @@ function generate() {
 function Numbers() {
   const classes = useStyles();
   const [numbers, setNumbers] = useState(generate());
+  const [show, setShow] = useState(false);
   const speak = () => {
     if (typeof speechSynthesis === 'undefined') {
       console.error("There is no speech synthesis API in this browser");
@@ -33,27 +34,29 @@ function Numbers() {
       utterThis.lang = "fr";
       speechSynthesis.speak(utterThis);
     }
-  }
+  };
   const nextNumber = () => {
+    setShow(false);
     setNumbers(generate())
-  }
+  };
+  const showAnswer = () => setShow(true);
 
   return (
     <React.Fragment>
       <Container fixed>
         <Typography component="div">
           <Box component="span" className={classes.answerBox}>
-            {numbers}
+            {show ? numbers : "?"}
           </Box>
         </Typography>
         <Typography component="div" className={classes.buttonBox}>
           <Button variant="contained" onClick={speak}>Speak</Button>
-          <Button variant="contained" color="secondary">Show Answer</Button>
+          <Button variant="contained" color="secondary" onClick={showAnswer}>Show Answer</Button>
           <Button variant="contained" color="primary" onClick={nextNumber}>Next</Button>
         </Typography>
       </Container>
     </React.Fragment>
-  )
+  );
 }
 
 export default Numbers;
